@@ -25,6 +25,8 @@ public class PaginationDTO {
     private Integer page;
     //给前端展示的页码[1,2,3,4,5]
     private List<Integer> pages = new ArrayList<>();
+    //totalPage 当前页面下显示几个分页按钮
+    private Integer totalPage;
 
     public void setPagination(Integer totalCount, Integer page, Integer size) {
         /*
@@ -33,12 +35,13 @@ public class PaginationDTO {
          * size 展示几条记录
          */
         //totalPage 当前页面下显示几个分页按钮
-        Integer totalPage;
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
         } else {
             totalPage = totalCount / size + 1;
         }
+
+        this.page = page;
         pages.add(page);
         /* 这个循环做的事情是：先把当前页面插入到给前端展示的页码[当前页码]
          * 如果当前页码减去1，大于0，那么pages=[当前页码-1，当前页码]，就把这个新页码插入到当前页码的前面

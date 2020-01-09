@@ -67,24 +67,25 @@
                 </div>
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
+                        <li th:if="${pagination.isShowFirstPage()}">
+                            <a th:href="@{/(page=1)}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" aria-label="Previous">
+                        <li th:if="${pagination.isShowPrevious()}">
+                            <a th:href="@{/(page=${pagination.page - 1})}" aria-label="Previous">
                                 <span aria-hidden="true">&lt;</span>
                             </a>
                         </li>
-                        <li th:each="page :${pagination.pages}"><a th:href="@{/(page=${page})}" th:text="${page}">1</a></li>
-                        <li>
-                            <a href="#" aria-label="Previous">
+                        <li th:each="page :${pagination.pages}" th:class="${pagination.page == page}?'active':''">
+                            <a th:href="@{/(page=${page})}" th:text="${page}">1</a></li>
+                        <li th:if="${pagination.isShowNext()}">
+                            <a th:href="@{/(page=${pagination.page + 1})}" aria-label="Previous">
                                 <span aria-hidden="true">&gt;</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" aria-label="Next">
+                        <li th:if="${pagination.isShowEndPage()}">
+                            <a th:href="@{/(page=${pagination.getTotalPage()})}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
